@@ -1,0 +1,23 @@
+clc;clear variables; close all
+
+
+muREF = 1.716*10^(-5);
+tREF = 273.15;
+sAIR = 110.4;
+
+ti=-50 +273;
+tf = 500 +273;
+tvec = linspace(ti,tf,1000);
+for p=1:length(tvec)
+    plotvec(1,p)= tvec(1,p);
+    t = tvec(1,p);%tvec to var allocation
+    m = (t/tREF)^1.5;
+    plotvec(2,p)=(muREF)*m*((tREF+sAIR)/(t+sAIR));
+end
+plotvec(1,:) = plotvec(1,:) -273;
+figure(1)
+plot(plotvec(1,:),plotvec(2,:),'LineWidth',2);
+xlabel("temperature[c]")
+ylabel("viscosity[Pa*s]")
+grid on
+title("FF1 Viscosity vs. Temp")
